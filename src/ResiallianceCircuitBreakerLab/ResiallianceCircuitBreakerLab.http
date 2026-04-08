@@ -1,0 +1,6 @@
+@ResiallianceCircuitBreakerLab_HostAddress = http://localhost:5206
+
+GET {{ResiallianceCircuitBreakerLab_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

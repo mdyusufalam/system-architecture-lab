@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/CircuitBreakerLab/CircuitBreakerLab.csproj" />
+    <Project Path="src/ResiallianceCircuitBreakerLab/ResiallianceCircuitBreakerLab.csproj" />
   </Folder>
 </Solution>

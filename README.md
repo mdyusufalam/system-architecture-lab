@@ -7,6 +7,7 @@ A comprehensive learning repository for system architecture patterns and resilie
 | SL | Project Name | Description | Documentation |
 |:--:|:-------------|:-----------|:--------------|
 | 1 | Circuit Breaker Lab | Demonstrates Circuit Breaker pattern using Polly resilience library in .NET 10. Learn failure handling, state management, and graceful degradation. | [README.md](./src/CircuitBreakerLab/README.md) |
+| 2 | Resilience Circuit Breaker Lab | Comprehensive resilience implementation combining Retry and Circuit Breaker patterns using Polly. Learn layered fault tolerance strategies. | [README.md](./src/ResiallianceCircuitBreakerLab/README.md) |
 
 ## 🛠️ Prerequisites
 

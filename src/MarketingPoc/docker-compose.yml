@@ -1,0 +1,75 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: marketingpoc_postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'        # Maximum CPU (1 core)
+          memory: '1G'       # Maximum Memory (1 Gigabyte)
+        reservations:
+          cpus: '0.5'        # Minimum guaranteed CPU (0.5 core)
+          memory: '512M'     # Minimum guaranteed Memory (512 Megabytes)
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: marketingpoc
+      POSTGRES_DB: marketingpoc
+      POSTGRES_MAX_CONNECTIONS: 500  # Increase significantly
+      POSTGRES_SHARED_BUFFERS: 512MB  # Increase memory
+      POSTGRES_WORK_MEM: 16MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - marketingpoc_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: marketingpoc_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - marketingpoc_network
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: marketingpoc_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@marketingpoc.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - marketingpoc_network
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import requests; requests.get('http://localhost:80/login')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  pgdata:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  marketingpoc_network:
+    driver: bridge

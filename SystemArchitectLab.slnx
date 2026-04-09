@@ -3,4 +3,11 @@
     <Project Path="src/CircuitBreakerLab/CircuitBreakerLab.csproj" />
     <Project Path="src/ResiallianceCircuitBreakerLab/ResiallianceCircuitBreakerLab.csproj" />
   </Folder>
+  <Folder Name="/src/MarketingPoc/" />
+  <Folder Name="/src/MarketingPoc/Source/">
+    <Project Path="src/MarketingPoc/Source/MarketingPoc.csproj" />
+  </Folder>
+  <Folder Name="/src/MarketingPoc/Tests/">
+    <Project Path="src/MarketingPoc/Tests/MarketingPoc.Tests.csproj" />
+  </Folder>
 </Solution>

@@ -1,0 +1,69 @@
+### Marketing POC - Test Observation Controller Examples
+
+@baseUrl = http://localhost:5000/api/tests
+
+### Create a Load Test Result
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "testType": "Load",
+  "startTime": "2026-04-08T10:00:00Z",
+  "endTime": "2026-04-08T10:05:00Z",
+  "requestCount": 150000,
+  "errorCount": 1500,
+  "p95Latency": 245.5,
+  "avgCpuUsage": 65.2
+}
+
+### Create a Stress Test Result
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "testType": "Stress",
+  "startTime": "2026-04-08T11:00:00Z",
+  "endTime": "2026-04-08T11:02:30Z",
+  "requestCount": 250000,
+  "errorCount": 8500,
+  "p95Latency": 512.8,
+  "avgCpuUsage": 89.5
+}
+
+### Create a Soak Test Result
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "testType": "Soak",
+  "startTime": "2026-04-08T12:00:00Z",
+  "endTime": "2026-04-08T12:30:00Z",
+  "requestCount": 120000,
+  "errorCount": 240,
+  "p95Latency": 189.3,
+  "avgCpuUsage": 58.7
+}
+
+### Get All Test Results
+GET {{baseUrl}}
+
+### Get All Load Tests
+GET {{baseUrl}}?testType=Load
+
+### Get All Stress Tests
+GET {{baseUrl}}?testType=Stress
+
+### Get All Soak Tests
+GET {{baseUrl}}?testType=Soak
+
+### Get Specific Test Result by ID
+GET {{baseUrl}}/1
+
+### Get Campaigns for Tenant 1
+GET http://localhost:5000/api/tenants/1/campaigns?page=1&pageSize=20
+
+### Get Campaigns for Tenant 1 - Page 2
+GET http://localhost:5000/api/tenants/1/campaigns?page=2&pageSize=20
+
+### Get Campaigns for Tenant 500
+GET http://localhost:5000/api/tenants/500/campaigns?page=1&pageSize=50
